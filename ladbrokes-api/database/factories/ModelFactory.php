@@ -23,7 +23,7 @@ $factory->define(App\Models\Competitors::class, function (Faker\Generator $faker
 $factory->define(App\Models\Races::class, function (Faker\Generator $faker) {
     return [
         'meetings_id' => 1,
-        'closeTime' => $faker->dateTimeBetween($startDate = '+1 months', $endDate = '+ 1 years', $timezone = null),
+        'closeTime' => $faker->dateTimeBetween($startDate = '+1 minutes', $endDate = '+ 1 days', $timezone = 'AEST'),
     ];
 });
 

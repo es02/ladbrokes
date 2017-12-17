@@ -18,4 +18,15 @@ class ExampleTest extends TestCase
             $this->response->getContent()
         );
     }
+
+    public function testError()
+    {
+        $this->get('/race/squeak');
+
+        $this->assertEquals(
+            $this->response->getContent(), "{\"Error\":\"Race ID value must be an integer.\"}"
+        );
+    }
+
+
 }

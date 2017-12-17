@@ -35,9 +35,9 @@ cp .env.example .env
 Run migrations and seeds
 
 ```
-artisan migrate:install
-artisan migrate
-artisan db:seed
+php artisan migrate:install
+php artisan migrate
+php artisan db:seed
 ```
 
 Run everything

@@ -35,7 +35,7 @@ class RaceController extends Controller
      */
     public function index()
     {
-        $races = Races::where('closeTime', '>', carbon::now())
+        $races = Races::where('closeTime', '>', carbon::now('Australia/Brisbane'))
                         ->orderBy('closeTime', 'asc')
                         ->take(5)
                         ->get();
@@ -52,11 +52,17 @@ class RaceController extends Controller
      */
     public function race($id)
     {
-        $races = Races::where('id', $id)
-                        ->take(1)
-                        ->get();
+        if(!is_int($id)){
+            $data = array('Error' =>'Race ID value must be an integer.');
+        }else{
+            $races = Races::where('id', $id)
+                            ->take(1)
+                            ->get();
 
-        $data = $this->buildData($races);
+            $data = $this->buildData($races);
+        }
+
+
 
         return response()->json($data);
     }
