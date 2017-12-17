@@ -1,0 +1,2 @@
+php -S localhost:8000 -t ladbrokes-api/public
+php -S localhost:8001 -t client

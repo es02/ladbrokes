@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Ladbrokes technical test</title>
+        <style>
+            body{
+            text-align: center;
+            background: #00ECB9;
+            font-family: sans-serif;
+            font-weight: 100;
+            }
+
+            h1{
+            color: #396;
+            font-weight: 100;
+            font-size: 40px;
+            margin: 40px 0px 20px;
+            }
+
+            #clockdiv{
+            font-family: sans-serif;
+            color: #fff;
+            display: inline-block;
+            font-weight: 100;
+            text-align: center;
+            font-size: 30px;
+            }
+
+            #clockdiv > div{
+            padding: 10px;
+            border-radius: 3px;
+            background: #00BF96;
+            display: inline-block;
+            }
+
+            #clockdiv div > span{
+            padding: 15px;
+            border-radius: 3px;
+            background: #00816A;
+            display: inline-block;
+            }
+
+            .smalltext{
+            padding-top: 5px;
+            font-size: 16px;
+            }
+        </style>
+    </head>
+    <body>
+
+    <h1><a href = "http://localhost:8001/index.php">My Webpage</a></h1>
+        {% if child == true %}
+            <p>{{ data.meeting.type }} race at {{ data.meeting.location }}</p>
+        <ul id="navigation">
+            {% for dog in data.competitors %}
+                <li>{{ dog.position }} {{ dog.name }} {{ dog.odds }}:1</a></li>
+            {% endfor %}
+        {% else %}
+        </ul>
+            {% for item in data %}
+                <p id='{{ item.race.id }}'> >> <a href="index.php/?id={{ item.race.id }}">
+                {{ item.meeting.type }} {{ item.meeting.location }}</a> Time remaining: </p>
+            {% endfor %}
+        {% endif %}
+    </body>
+</html>
+
+{% for item in data %}
+<script>
+    // Set the date we're counting down to
+    var a{{ item.race.id }}_countDownDate = new Date("{{ item.race.closeTime }}".replace(/-/g,"/")).getTime();
+
+    // Update the count down every 1 second
+    var a{{ item.race.id }}_x = setInterval(function() {
+
+        // Get todays date and time
+        var a{{ item.race.id }}_now = new Date().getTime();
+
+        // Find the distance between now an the count down date
+        var a{{ item.race.id }}_distance = a{{ item.race.id }}_countDownDate - a{{ item.race.id }}_now;
+
+        // Time calculations for days, hours, minutes and seconds
+        var a{{ item.race.id }}_days = Math.floor(a{{ item.race.id }}_distance / (1000 * 60 * 60 * 24));
+        var a{{ item.race.id }}_hours = Math.floor((a{{ item.race.id }}_distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var a{{ item.race.id }}_minutes = Math.floor((a{{ item.race.id }}_distance % (1000 * 60 * 60)) / (1000 * 60));
+        var a{{ item.race.id }}_seconds = Math.floor((a{{ item.race.id }}_distance % (1000 * 60)) / 1000);
+
+        // Display the result in the element with id="demo"
+        document.getElementById("{{ item.race.id }}").innerHTML = ">> <a href=\"index.php/?id={{ item.race.id }}\"> {{ item.meeting.type }} {{ item.meeting.location }}</a> Time remaining: "
+        + a{{ item.race.id }}_days + "d " + a{{ item.race.id }}_hours + "h "
+        + a{{ item.race.id }}_minutes + "m " + a{{ item.race.id }}_seconds + "s ";
+
+        // If the count down is finished, write some text
+        if (a{{ item.race.id }}_distance < 0) {
+            clearInterval(a{{ item.race.id }}x);
+            document.getElementById("{{ item.race.id }}").style.visibility = "hidden";
+        }
+    }, 1000);
+</script>
+{% endfor %}
