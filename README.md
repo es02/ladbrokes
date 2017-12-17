@@ -54,7 +54,7 @@ Open a browser to http://localhost:8001
 Client page has 0 tests
 API: cd to ladbrokes-api folder and run tests:
 ```
-phpunit
+php ./vendor/bin/phpunit
 ```
 
 ## Deployment
